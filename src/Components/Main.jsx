@@ -27,7 +27,7 @@ export default function Main() {
     }
     id = setTimeout(() => {
       fetchResults();
-    }, 2500);
+    }, 1800);
     return () => clearTimeout(id);
   }, [inpText, inLan, outLan]);
   return (

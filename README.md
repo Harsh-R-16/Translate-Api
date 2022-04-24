@@ -1,6 +1,6 @@
 # Translate Api
 
-### Link: https://translate-api-harsh.netlify.app/
+### Link: https://language-translate-harsh.netlify.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
