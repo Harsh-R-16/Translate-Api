@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { arr } from "./data";
+let id;
 export default function Main() {
   let [inpText, setInpText] = useState(
     "English is one of the most widely spoken languages in the world, and with the British Council estimating that 2 billion people will be learning it by 2020, that certainly looks set to continue."
@@ -8,22 +9,26 @@ export default function Main() {
   let [inLan, setInLan] = useState("en");
   let [outLan, setOutLan] = useState("hi");
 
-  async function fetchResults() {
-    const a = await fetch("https://libretranslate.de/translate", {
-      method: "POST",
-      body: JSON.stringify({
-        q: inpText ? inpText : "Harsh",
-        source: inLan,
-        target: outLan,
-        format: "text",
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const b = await a.json();
-    setOutText(b.translatedText);
-  }
   useEffect(() => {
-    fetchResults();
+    async function fetchResults() {
+      const a = await fetch("https://libretranslate.de/translate", {
+        method: "POST",
+        body: JSON.stringify({
+          q: inpText ? inpText : "Harsh",
+          source: inLan,
+          target: outLan,
+          format: "text",
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const b = await a.json();
+      // console.log(b.translatedText);
+      setOutText(b.translatedText);
+    }
+    id = setTimeout(() => {
+      fetchResults();
+    }, 2500);
+    return () => clearTimeout(id);
   }, [inpText, inLan, outLan]);
   return (
     <main>
